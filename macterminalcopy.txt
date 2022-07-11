@@ -1,0 +1,2380 @@
+Hello this is all the configuration that I made when compiling and running a code in C language using Mac terminal:
+
+I installed tone Xcode-select, then I  use this cmd line to update the Xcode. 
+
+sudo rm -rf /Library/Developer/CommandLineTools
+xcode-select --install
+
+After this all went good.
+
+Create a directory called exo00, then change its name to ex00:
+
+mac@macosy testparadis % mkdir exo00
+mac@macosy testparadis % mv exo00 ex00
+
+
+Create to files: type file & txt, using echo cmd and she its contents using cat:
+
+mac@macosy ex00 % echo hi there! > file.txt
+mac@macosy ex00 % ls
+file.txt
+mac@macosy ex00 % cat fie 
+cat: fie: No such file or directory
+mac@macosy ex00 % cat file.txt
+hi there!
+mac@macosy ex00 % echo SW > file
+mac@macosy ex00 % ls
+file		file.txt
+mac@macosy ex00 % cat file 
+SW
+
+the permission was denied to execute the files in the ex00 directory, so I gave it the permission when typing the cmd:
+Basically, the permission is always allowed to print the file’s contents when using cat command file, but when trying to access it using ./file, it’s been denied that’s why we need to make it executable using chmod +x to allow accessing to the file.
+
+
+mac@macwind ex00 % chmod +x file
+mac@macwind ex00 % ./file
+./file: line 1: SW: command not found
+mac@macwind ex00 % cat file
+SW
+
+Text Vim:
+
+In vim there are 3 modes of operation: Normal, Insert, and Visual
+
+To edit an existing file, or to create a new one that it doesn’t exit before, we type: 
+vi file.txt
+
+We type :
+
+i to go to insert mode before the cursor, and then escape to get out it.
+I to to the beginning of the line
+o to insert in the next line of the cursor.
+a to insert in the following character of the cursor. 
+A to the end of the line
+e to the end of the word
+0 jump to the beg of the line without the insert mode
+$ jump to the end of line without entering the insert mode
+
+:q! :quit and dismiss any changemant and quit,  because if typing just :q will not able to exit until save changes.
+:!ls :terminal command not vim. 
+:set number :to activate numbers line
+:set relativenumber :to show relative lines according to a cursor.
+:set mouse=a :set mouse to active, to be able to use it in the vim
+
+We can move to n lines from a cursor start using the n number plus left/right/up/down
+ 
+Hence, all the setting that we’ve used in a vim session are immediately removed after exiting the file, in order to save it, we need to use the vimrc configuration file, and type all the configs:
+
+In the macOS, the .vimrc file is located at directory: /usr/share/vim/.vimrc
+
+So I execute:  
+
+vi .vimrc
+
+We added our setting to the vim file: 
+set number
+set mouse=a
+colorscheme slate
+
+
+Fortunelty I found the error and the mistake, actually I needed to type ~ not ˜ to  point to the home path in terminal 
+And it’s written using: option + 5.
+
+To cancel changes, we use after logging out from the INSERT mode:
+
+<- action (check last change ctrl z) : u key after
+-> action (check other the change redo ). Ctrl r
+
+
+Concerning the Visual mode: 
+
+The Visual mode permit to select the words items in the vim so we can copy/paste/cut/delete:
+To select using only keyboard: ->v <-v that means pressing v and moving the cursor key into the character.
+
+To delete: d key
+To yank(copy slang in vim): y key
+To yank the whole line: double y key
+To paste: p key
+To paste double time: double p
+To quit Visual mode: click esc twice.
+To delete the whole line without selecting it all: dd key.
+To delete characters until the beg starting at a random word: use d+0
+To delete until the end of the line: d+$ 
+To delete until the end of the word: d+e
+To delete between the quotation marque “”: use c+i+” 
+To yank between the  “ “: y+i+”
+To jump to the closing brackets : %
+Delete every inside the brackets included: d%
+Jumping to one position before specifying symbol like * or ( : t+the symbol for eg t* 
+Jumping to the position of the symbol, we use find: f+symbol
+Deleting until one position before the symbol: d+t+symbol
+Deleting until the symbol  included: d+f+symbol
+Jumping  backwards to one position before specifying symbol like * or ( … : T+the symbol for eg t* 
+Jumping backwards to the position of the symbol, we use find: F+symbol
+Deleting backwards until one position before the symbol: d+T+symbol
+Deleting backwards until the symbol  included: d+F+symbol
+We can combine all for eg:
+Copy text until symbol: y+t and then p
+Jump to the beg of a file: gg
+Jump to the end of a file: G
+Jump to a specific n file: n+G or type :n
+
+// 
+
+Indent a line >>: go to visual mode select using -> and then click on > to go forward or < to go backwards
+
+// Visual line mode:  Press shift+v
+// Visual block mode:  Press ctrl +v
+
+To select many line up and down: we play with the up and down symbol
+
+To iterating blocks: we use the ctrl+v 
+
+To indent automatically and correctly our code lines: ==
+To indent all the file: gg=G
+REMEMBER: to jump to a n line: n+G
+
+To search a word until the end of the file: /+the word search item and jump over the next word using n, and N to the previous one.
+To search a word until the beg of the file: ?+word and then same use n and N to iterate. 
+We can also look for the word using the # or * depends to the direction after selecting the word on visual mode.
+
+To have space when scrolling down we use zz
+
+
+To change a word1 to word2 in the whole file we type the cmd: :%/word1/word2/g
+
+To delete a line, and keep deleting after it: dd plus clicks on dot “.” 
+Repeating a command using a dot “.” for eg delete until quotation: we put the cursor and then we do:  dt” 
+Deleting in vim means also cutting, we can delete and recover it using p.
+
+
+##SHELL0
+
+EXERCICE 1:
+
+##Understand the ls -l 
+
+The bytes section, The size in bytes, may be modiedy this by using the :-h option together with -l this will have the output in k,M,G for a better understanding.
+
+PB SOLVED 
+
+
+mac@macwind ~ % cd desktop
+mac@macwind desktop % cd ex01
+mac@macwind ex01 % ls -l
+total 8
+-rw-r--r--  1 mac  staff  40 May 18 15:42 testShell00
+mac@macwind ex01 %  chmod a-w testShell00
+mac@macwind ex01 % ls -l
+total 8
+-r--r--r--  1 mac  staff  40 May 18 15:42 testShell00
+mac@macwind ex01 % chmod go +x testShell00
+chmod: Invalid file mode: go
+mac@macwind ex01 % chmod go+x testShell00
+mac@macwind ex01 % ls -l
+total 8
+-r--r-xr-x  1 mac  staff  40 May 18 15:42 testShell00
+mac@macwind ex01 % 
+
+To understand the chmod:
+
+Giving this eg: -rw-r--r--
+
+- for File, d for Directory, l for Link
+The second,third,fourth fields are permissions that means read, write and execute, and comes in three different fields that belongs to the permission the:
+	•	second: The owner has over the file, 3 spaces eg: rw-
+	•	third: The group has over the file 3 spaces eg: r—
+	•	fourth: Everybody else has over the file 3 spaces eg: r—
+	•	
+This field specifies the number of links or directories inside this directory.
+The sixth field is the user
+The user that owns the file, or directory
+The seventh field is te group
+The group that file belongs to, and any user in that group will have the permissions given in the third field over that file.
+The eighth field
+The size in bytes, you may modify this by using the -h option together with -l this will have the output in k,M,G for a better understanding.
+The ninth field:
+The date of last modification
+The tenth field:
+The name of the file
+And for the cmd:
+To change the permission for all the classes: u(user), g(group), o(other),a(all: u,g, and o), we use the operators “+ add access”, “-remove access”,”set exact access”
+For example, to add permission for everyone to read a file in the current directory named myfile, at the Unix prompt, enter:
+chmod a+r myfile
+
+#understand the tar
+mac@macwind ex01 % tar -cf testShell00.tar testShell00
+mac@macwind ex01 % ls
+testShell00	testShell00.tar
+
+The Linux ‘tar’ stands for tape archive, is used to create Archive and extract the Archive files. tar command in Linux is one of the important command which provides archiving functionality in Linux. We can use Linux tar command to create compressed or uncompressed Archive files and also maintain and modify them. 
+
+-c : Creates Archive 
+-x : Extract the archive 
+-f : creates archive with given filename 
+-t : displays or lists files in archived file 
+-u : archives and adds to an existing archive file 
+-v : Displays Verbose Information 
+-A : Concatenates the archive files 
+-z : zip, tells tar command that creates tar file using gzip 
+-j : filter archive tar file using tbzip 
+-W : Verify a archive file 
+-r : update or add file or directory in already existed .tar file
+ 
+To change the number of links in a simple file and not a directory, (Link count (what constitutes a "link" here varies))
+mac@macwind desktop % cd ex02
+mac@macwind ex02 % ls -l
+total 32
+drwx--xr-x  2 mac  staff  64 May 29 23:02 test0
+-rwxr-xr--  1 mac  staff   4 May 29 22:19 test1
+dr-x---r--  2 mac  staff  64 May 29 22:23 test2
+-r-----r--  2 mac  staff   1 May 29 23:33 test3
+-rw-r----x  1 mac  staff   2 May 29 23:34 test4
+-r-----r--  2 mac  staff   1 May 29 23:33 test5
+mac@macwind ex02 % ln test5 test6  
+mac@macwind ex02 % ls
+test0	test1	test2	test3	test4	test5	test6
+mac@macwind ex02 % ls -l
+total 40
+drwx--xr-x  2 mac  staff  64 May 29 23:02 test0
+-rwxr-xr--  1 mac  staff   4 May 29 22:19 test1
+dr-x---r--  2 mac  staff  64 May 29 22:23 test2
+-r-----r--  3 mac  staff   1 May 29 23:33 test3
+-rw-r----x  1 mac  staff   2 May 29 23:34 test4
+-r-----r--  3 mac  staff   1 May 29 23:33 test5
+-r-----r--  3 mac  staff   1 May 29 23:33 test6
+
+These code lines show how to create hard links between two files using the ln cmd
+
+
+EXERCISE 2:
+
+The cmd line: list all files and directories in the current directory, separated by a comma, by order of creation date, and the directories names are followed by slash charter
+Check: https://www.computerhope.com/unix/uls.htm
+
+ls -Ump
+
+-p : append “/“ indicator to directories
+-m: fill width with a comma separated list of entries
+-U: list entries  in directory order.
+
+EXERCICES 3:
+
+Create a shell script that return the last 3 ids of commit of our git.
+##git Notes:
+
+
+
+
+Using the cmd:
+
+Cat -e filename will make the the $ sign shown at the end of its lines:
+mac@macwind shellexercices % cat -e testfile
+hi there$
+
+
+We use the script:
+git log -3 --pretty=%H
+Or
+git log --format="%H" -n 3
+
+mac@macwind shellexercices % git log --format="%H" -n 3
+92ac47b26a068f209f0ce422690cc5d7d2dc13fa
+8b698f1e6b0920822948627ca3371688f5f5122b
+e527bb56f3237ea812d38935d3b15bfa68e2fb84
+mac@macwind shellexercices % git log -3 --pretty=%H
+92ac47b26a068f209f0ce422690cc5d7d2dc13fa
+8b698f1e6b0920822948627ca3371688f5f5122b
+e527bb56f3237ea812d38935d3b15bfa68e2fb84
+
+
+mac@macwind shellexercices % bash git_commit.sh | cat -e 
+92ac47b26a068f209f0ce422690cc5d7d2dc13fa$
+8b698f1e6b0920822948627ca3371688f5f5122b$
+e527bb56f3237ea812d38935d3b15bfa68e2fb84$
+
+EXERCICE 4:
+Create a shell script that return the list of the ignored existant files in my actual repo
+
+We use the script:
+
+git ls-files --others --exclude-standard -i
+
+mac@macwind shellexercices % git ls-files --exclude-standard -o -i
+git_ignore.sh
+
+
+EXERCICE 5:
+
+diff:
+The Linux diff command is used to compare two files line by line and display the difference between them. This command-line utility lists changes you need to apply to make the files identical.
+
+https://teletype.in/@udarcs/PaREDM3oFqb
+EXERCICE 6:
+
+In a file called clean place the cmd line that will search for all files in the current directory as well as in its sub-directories with a name ending by ~ or a name that start and end with #:
+
+
+The pb with using the pipe with find and grep is we cannot delete them at the end. But we try  to use them just to know grep functionality:
+
+mac@macwind shellexercices % find . | grep -e  '.txt$' -e '.c$'
+Is the same as
+mac@macwind shellexercices % find . | grep '.txt$\|.c$'
+
+=> grep -e  allows to use several strings for searching which This works quite similar to \| stands for or but for searching just one pattern the -e is often optional
+
+Now we move to use only find with filters:
+
+-o in find means or
+
+To filter the big and the end in a file’s name:
+We use * between the patterns for eg:
+mac@macwind shellexercices % find . -type f -name "*.txt" -o -name "test*tar" 
+./ex00/file.txt
+./ex07/b.txt
+./ex01/testShell00.tar 
+This line of code should files in txt format and that files that start by test and finish by tar
+
+Remember in find:
+\(expr \): True if ‘expr’ is true; used for grouping criteria combined with OR or AND
+
+For the exerices we use:
+
+find . -type f \( -name "#*#" -o -name "*~" \) -print -delete
+Check https://alvinalexander.com/unix/edu/examples/find.shtml 
+
+EXERCICE 7:
+Create a magic file called ft_magic that will be formatted appropriately to detect files of 42 file type, built with a 42 string at the 42nd byte.
+
+In case we have a magic file, to compile it, we use the command:
+file -C -m <your magic file>
+To run it:
+
+File -m <your magic file> to use it
+
+	•	File has to be formatted appropriately to detect files of 42 file type:
+	•	This file type is defined by having a 42 'string' at the 42nd byte
+	•	If we go to man magic we can see the following break down:
+
+https://www.ibm.com/docs/en/zos/2.3.0?topic=formats-magic-format-etcmagic-file
+
+The magic file contains lines, each line consists of 4 fields, which are separated by one or more tabs:
+
+1- the first field is a byte offset in the file, and the offset immediately follows a continuation character
+2- The 2ns field consists tof the type of the value (in our case is string, it can be signed decimal and unsigned decimal)
+3- This 3rd field, since we have a string value in the 2nd field, then the test will succeed only when a string value exactly matches the bytes from the file
+
+	1	Byte offset: here we have the 42th octet
+	2	Value type: here we have a string
+	3	Optional relational operator ("=" by default) and value to match (numeric or string constant) here we have 42 
+	4	String to be printed the message is 42 magic
+
+=>
+42	string 42	 42 file
+
+
+Piscine 42 schedule:
+https://github.com/pasqualerossi/42-Piscine/tree/main/42%20Piscine%20Schedule
+English pfd subjects:
+https://github.com/appinha/42sp-piscine/blob/master/PDFs/sujets/d01_shell00-en.pdf
+
+
+
+
+##SHELL1
+
+EXERCICES 01 print_group.sh
+
+Write a cmd line that will display the list of groups for which the login, contained in the environment variable FT_USER, is a member. Separated by commas without spaces.
+Note that the dollar sign in linux terminal will return the value inside the variable name: 
+E.g:
+
+mac@macwind ~ % FT_USER=mac
+mac@macwind ~ % echo $FT_USER
+mac
+mac@macwind ~ % groups $FT_USER
+staff everyone localaccounts admin _appstore _lpadmin _lpoperator _developer _analyticsusers com.apple.access_ftp com.apple.access_screensharing com.apple.access_ssh com.apple.access_remote_ae
+
+The less cmd: is a linux terminal pager that shows a file’s contents one screen at a time.
+To show all users:
+We use:
+
+mac@macwind ~ % less /etc/passwd
+
+##
+# User Database
+# 
+# Note that this file is consulted directly only when the system is running
+# in single-user mode.  At other times this information is provided by
+# Open Directory.
+#
+# See the opendirectoryd(8) man page for additional information about
+# Open Directory.
+##
+nobody:*:-2:-2:Unprivileged User:/var/empty:/usr/bin/false
+root:*:0:0:System Administrator:/var/root:/bin/sh
+daemon:*:1:1:System Services:/var/root:/usr/bin/false
+_uucp:*:4:4:Unix to Unix Copy Protocol:/var/spool/uucp:/usr/sbin/uucico
+_taskgated:*:13:13:Task Gate Daemon:/var/empty:/usr/bin/false
+_networkd:*:24:24:Network Services:/var/networkd:/usr/bin/false
+_installassistant:*:25:25:Install Assistant:/var/empty:/usr/bin/false
+_lp:*:26:26:Printing Services:/var/spool/cups:/usr/bin/false
+_postfix:*:27:27:Postfix Mail Server:/var/spool/postfix:/usr/bin/false
+_scsd:*:31:31:Service Configuration Service:/var/empty:/usr/bin/false
+_ces:*:32:32:Certificate Enrollment Service:/var/empty:/usr/bin/false
+_appstore:*:33:33:Mac App Store Service:/var/db/appstore:/usr/bin/false
+_mcxalr:*:54:54:MCX AppLaunch:/var/empty:/usr/bin/false
+:
+
+
+My 1st proposition: using the sed ’s/ /,/g’ with the g flag to match all occurrences in the text. (From js regex), the plus sign + matches one or more occurrences of the one character regular expression.
+
+mac@macwind shell1repo % groups mac | sed 's/ /,/g' 
+staff,everyone,localaccounts,admin,_appstore,_lpadmin,_lpoperator,_developer,_analyticsusers,com.apple.access_ftp,com.apple.access_screensharing,com.apple.access_ssh,com.apple.access_remote_ae
+
+
+2nd proposition: using [:blank:] or [:space:]: sed 's/[[:blank:]]\{1,\}/,/g'
+  [:blank:]
+  ⁃	Blank characters: space and tab.
+	⁃	 [:space:]
+	⁃	Space characters: in the 'C' locale, this is tab, newline,
+	⁃	vertical tab, form feed, carriage return, and space.
+We can use:
+
+\{1,\} means the same as the extended regular expression modifiers + and {1,} ("one or more")
+
+mac@macwind shell1repo % groups mac | sed 's/[[:blank:]]\{1,\}/,/g'            
+staff,everyone,localaccounts,admin,_appstore,_lpadmin,_lpoperator,_developer,_analyticsusers,com.apple.access_ftp,com.apple.access_screensharing,com.apple.access_ssh,com.apple.access_remote_ae
+
+We use double bracelet [[]], for sed to match in the POSIX character class. If not will only match the alphabets characters of blank or space.
+Also, we use the {1,\} means the same as the extended regular expression modifiers + and {1,} ("one or more") when using sed.
+
+3rd proposition: using the tr command:  tr -s '[:blank:]' '[,*]'
+tr is a command-line utility in Linux and Unix systems that translates, deletes, and squeezes characters from the standard input and writes the result to the standard output.
+mac@macwind shell1repo % groups mac | tr -s '[:blank:]' '[,*]'
+                    
+staff,everyone,localaccounts,admin,_appstore,_lpadmin,_lpoperator,_developer,_analyticsusers,com.apple.access_ftp,com.apple.access_screensharing,com.apple.access_ssh,com.apple.access_remote_ae
+
+tr -s:replaces instances of repeated characters with a single character.
+[,*] means "as many commas as is needed for this set to match the number of characters in the first set", or
+
+
+
+EXERCICES 02 find_sh
+
+Write a cmd line the searches for all names that end with .sh in the current directory and all its sub-directorie. It should display only the file names without the .sh
+
+NOTE with sed, to recognise the last character .sh we need the dollar sign same as grep: 
+As I tried:
+With find . -type f | grep ‘.sh$’ | sed ’s/‘.sh’//‘
+mac@macwind shell1repo % ./find_sh.sh 
+./find.sh
+./ex01/print_groups
+We note it replace the _sh with empty space.
+
+To fix it we use and without ‘’ 
+find . -type f | grep ‘.sh$’ | sed ’s/.sh$//‘
+mac@macwind shell1repo % ./find_sh.sh 
+./find_sh
+./ex01/print_groups
+
+
+To eliminate character from the dot until the last slash. We use:
+sed ’s/.*\///‘ and as an example we have:
+
+We use it to eliminate characters from the dot until the ex one using .*ex
+mac@macwind exercices % find . -type f | grep '.sh$'| sed 's/.*ex//' 
+./Shell1Repo/find_sh.sh
+01/print_groups.sh
+06/git_ignore.sh
+05/git_commit.sh. 
+
+In our case the command line will be:
+
+find . -type f | grep ‘.sh$’ | sed ’s/.\sh$//‘ | sed ’s/.*\///‘
+
+mac@macwind shell1repo % find . -type f | grep '.sh$' | sed 's/.sh$//' | sed 's/.*\///'
+find_sh
+print_groups
+
+mac@macwind exercices % ./shell1repo/find_sh.sh 
+find_sh
+print_groups
+git_ignore
+git_commit
+
+
+EXERCICES 03 count_files:
+
+Write a cmd line that counts and displays the number of regular files and directories in the current directory and all its sub-directories. It should include “.”, the starting directory.
+
+
+-o: means “or”. For eg:
+mac@macwind exercices % find . -iname a.txt -o -iname  b.txt
+./Shell0Repo/ex07/b.txt
+./b.txt
+./a.txt
+
+#!/bin/sh
+find . -type f -o -type d | wc -l | sed 's/[[:blank:]]\{1,\}//'
+
+EXERCICES 04 MAC.sh:
+
+Write a command line that displays your machine’s MAC adresses. Each address must be followed by a line break.
+
+The following ifconfig command with the -a argument will display information of all active or inactive network interfaces on the server. 
+And to grep the info after ether which stands for network address we use:
+
+mac@macwind ~ % ifconfig -a | grep '[[:blank:]]ether' | sed 's/[[:blank:]]ether //'
+ac:de:48:00:11:22 
+fa:ff:c2:44:09:1f 
+f8:ff:c2:44:09:1f 
+02:e9:7b:46:48:ed 
+02:e9:7b:46:48:ed 
+82:3a:c9:00:94:01 
+82:3a:c9:00:94:00 
+82:3a:c9:00:94:04 
+82:3a:c9:00:94:05 
+82:3a:c9:00:94:01
+
+Or 
+mac@macwind ~ % ifconfig -a | grep ether |  cut -c 8-24
+Which cut -c 8-24 show all characters from the 8th position to the 24th.
+
+The simplest I think is:
+mac@macwind ~ % ifconfig -a | grep ether | sed 's/[[:blank:]]ether //'
+
+
+EXERCICE 5:  "\?'MaRViN'*1"
+
+Create a file containing only “42”, and nothing else, it’s name is "\?'MaRViN'*1" 
+
+So for that at first I ran the cmd line vi "\?'MaRViN'*1" but it gave dquote (to exit this mode we do CTRL G): which meant I didn’t complete the double quote and need to write the ending, and for this I wrote : 
+mac@macwind exercices % vi "\?$*'MaRViN'*$?\""
+mac@macwind exercices % ls
+Shell0Repo	Shell1Repo	\?'MaRViN'*1"
+
+It gave me \?'MaRViN'*1" instead of  "\?'MaRViN’*1”, so I wrote:
+
+mac@macwind exercices % vi "\"\?$*'MaRViN'*$?\""
+mac@macwind exercices % ls
+"\?'MaRViN'*1"	Shell0Repo	Shell1Repo	\?'MaRViN'*1"
+mac@macwind exercices % 
+
+Now that the “” pb are solved. We notice also that the Dollar sign and the slash won’’t work, after many essais:
+
+mac@macwind exercices % vi "\"\?\$*'MaRViN’*\$?\\”\”
+So this is the right script to express the slashes and the dollar sign!
+
+
+mac@macwind exercices % ls -lRa *MaRV* 
+-rw-r--r--  1 mac  staff  5 Jun 23 00:41 "\?$*'MaRViN'*$?\"
+
+Change the chmod permission:
+
+
+mac@macwind exercices % ls -lRa *MaRV* 
+-rw-r--r--  1 mac  staff  5 Jun 23 00:41 "\?$*'MaRViN'*$?\"
+mac@macwind exercices % chmod o+x "\"\?\$*'MaRViN'*\$?\\"\"
+mac@macwind exercices % ls -lRa *MaRV*                     
+-rw-r--r-x  1 mac  staff  5 Jun 23 00:41 "\?$*'MaRViN'*$?\"
+mac@macwind exercices % chmod o+r "\"\?\$*'MaRViN'*\$?\\"\"
+mac@macwind exercices % ls -lRa *MaRV*                     
+-rw-r--r-x  1 mac  staff  5 Jun 23 00:41 "\?$*'MaRViN'*$?\"
+mac@macwind exercices % chmod o-x "\"\?\$*'MaRViN'*\$?\\"\"
+mac@macwind exercices % ls -lRa *MaRV*                     
+-rw-r--r--  1 mac  staff  5 Jun 23 00:41 "\?$*'MaRViN'*$?\"
+mac@macwind exercices % chmod g-r+x "\"\?\$*'MaRViN'*\$?\\"\"
+mac@macwind exercices % ls -lRa *MaRV*                       
+-rw---xr--  1 mac  staff  5 Jun 23 00:41 "\?$*'MaRViN'*$?\"
+
+
+And now to turn the file into 2 bytes:
+
+When I write  42 in the file and then run the ls -l,it turned ut I have 3 bytes instead of 2:
+
+mac@macwind exercices % ls -lRa *MaRV*              
+-rw-r--r--  1 mac  staff  3 Jun 23 02:28 "\?$*'MaRViN'*$?\"
+
+So I check many forums, and I need to solve this pb, I need to add configuration to the .vimrc file, in order to delete the hidden line, because the text editor add a line at the end of our file. So I used:
+
+set binary
+set noeol
+
+And then all is good with the our fiLe:
+
+mac@macwind exercices % vi "\"\?\$*'MaRViN'*\$?\\"\"
+mac@macwind exercices % ls -lRa *MaRV* | cat -e            
+-rw---xr--  1 mac  staff  2 Jun 23 02:29 "\?$*'MaRViN'*$?\"$
+mac@macwind exercices % 
+
+
+
+EXERCICE 6:  Skip
+
+Write a cmd line that displays every other line for the cmd ls -l, starting from the first line.
+
+Awk is used to:
+Scans a file line by line 
+Splits each input line into fields 
+Compares input line/fields to pattern 
+Performs action(s) on matched lines 
+
+For e.g: to match lines with givin characters:
+awk ‘/the character/ {print}’ thefile
+Built-in variables in Awk
+
+To output even lines:
+$ awk 'NR%2==0' file
+To output odd lines:
+$ awk 'NR%2==1’ file
+
+So both cmd line are working:
+mac@macwind shell1repo % ls -l | awk 'NR%2==1'
+total 0
+drwxr-xr-x  3 mac  staff  96 Jun 20 20:49 ex02
+drwxr-xr-x  3 mac  staff  96 Jun 22 22:01 ex04
+mac@macwind shell1repo % ls -l | awk 'NR%2'   
+total 0
+drwxr-xr-x  3 mac  staff  96 Jun 20 20:49 ex02
+drwxr-xr-x  3 mac  staff  96 Jun 22 22:01 ex04
+
+
+EXERCICE 7 r_dwssap.sh
+
+Write a cmd line the display the cat/etc/passwd cmd, removing comments, every other line starting from the 2nd line, reversing each login, sorted in reverse alphabetical order line starting from the 2nd l…..
+
+To remove comments, we use the grep method, and with -v option to override lines that start with a hashtag.
+
+grep -v "grep" takes input line by line, and outputs only the lines in which grep does not appear
+mac@macwind exercices % cat /etc/passwd | grep -v '^#'
+
+
+This line of code:
+
+⚡ cat /etc/passwd | grep -v '^#' | awk 'NR%2==0' | awk -F: '{print $1}'
+
+
+
+Display even lines, and the first field from each line by using: awk -F: '{print $1}' -F: Detects the ‘:’ in the lines and then '{print $1}' will show the first char 
+before the first ‘:’
+
+⚡ cat /etc/passwd | grep -v '^#' | awk 'NR%2==0' | awk -F: '{print $1}'|rev
+
+The rev command line reverse the order of characters for each line as input.
+
+⚡ cat /etc/passwd | grep -v '^#' | awk 'NR%2==0' | awk -F: '{print $1}'|rev | sort -r
+
+The sort -r command sort in reverse alphabetical order 
+
+After setting our FT_FILE1 and FT_FILE2:
+
+⚡ cat /etc/passwd | grep -v '^#' | awk 'NR%2==0' | awk -F: '{print $1}'|rev | sort -r | sed -n "${FT_LINE1},${FT_LINE2}p"
+
+We can use the sed command to match the lines between the given numbers by using sed -n “n1,n2p”
+
+sed -n:
+What is the role of the -n option:
+
+sed processes each line (doing substitutions etc), then prints the result. If the processing involves the line being printed (e.g. sed's p command), then it gets printed twice (once during processing, then again by the automatic post-processing print). 
+The -n option disables the automatic printing, which means the lines you don't specifically tell it to print do not get printed, and lines you do explicitly tell it to print (e.g. with p) get printed only once.
+	•	sed -n '2,3p' test.txt - prints only lines 2 through 3, as requested
+	•	sed '2,3p' test.txt - prints each line (automatically), AND ALSO prints lines 2-3 a second time
+			
+The sed’s p command:
+p stands for printing the sed lines in the cmd.
+
+Difference between tr and perl and sed:
+
+https://stackoverflow.com/questions/56864122/replace-newline-with-comma-and-space-to-produce-1-line-output
+
+For tr cmd line, it recognises one character for e.g:
+
+tr '\n' “ ,” => would replace new line with just ‘,’ without the space.
+BUT
+perl -pe 's/\n/, /g' => recognises the space we mention after the comma
+
+
+Perl -pe: 
+
+-p: Places a printing loop around your command so that it acts on each line of standard input.
+-e:Allows you to provide the program as an argument rather than in a file. You don't want to have to create a script file for every little Perl one-liner
+
+
+⚡ cat /etc/passwd | grep -v '^#' | awk 'NR%2==0' | awk -F: '{print $1}'|rev | sort -r | sed -n "${FT_LINE1},${FT_LINE2}p" | perl -pe 's/\n/, /g'
+tocevod_, tessaelibom_, svc_, stneveelppa_, sstq_, srotcetedatad_, sorebrek_brk_, soibten_, sergtsop_, % 
+
+This will return the logins between the ft1 and ft2, and then replace the new line with a comma
+
+
+⚡ cat /etc/passwd | grep -v '^#' | awk 'NR%2==0' | awk -F: '{print $1}'|rev | sort -r | sed -n "{FT_LINE1},${FT_LINE2}p” | perl -pe 's/\n/, /g'| sed 's/, $/./'
+
+So the last cmd: sed 's/, $/./' turn the last comma and space into dot like the requirements. 
+
+I notice in the output:
+There is the percent symbol at the end of the file and even when doing cat -e t mark a dollar sign at the eof, I don’t see the result. 
+The percentage sign (%) at the end of a line indicates a missing newline character (\n).
+
+Set binary
+Set Noeol
+
+mac@macwind /Users/mac                                               master
+⚡ cat /etc/passwd | grep -v '^#' | awk 'NR%2==0' | awk -F: '{print $1}'|rev | sort -r | sed -n "7,15p" | perl -pe 's/\n/, /g'| sed 's/, $/./' | cat -e
+tocevod_, tessaelibom_, svc_, stneveelppa_, sstq_, srotcetedatad_, sorebrek_brk_, soibten_, sergtsop_.%                                                         
+
+
+TO SOLVE THIS PB:
+
+mac@macwind /Users/mac                                               master
+⚡ cat /etc/passwd | grep -v '^#' | awk 'NR%2==0' | awk -F: '{print $1}'|rev | sort -r | sed -n "7,15p" | perl -pe 's/\n/, /g'| sed 's/, $/./' ; echo| cat -e 
+tocevod_, tessaelibom_, svc_, stneveelppa_, sstq_, srotcetedatad_, sorebrek_brk_, soibten_, sergtsop_.$
+
+
+We add ; echo after the sed cmd line to add a line at the EOF!! And it works
+
+## To solve the slow problem in my terminl after I installed the oh-my-zsh I used the exo 2>zsh.err cmd since  I got many output when running the.set -x
+https://unix.stackexchange.com/questions/565905/oh-my-zshs-prompt-is-slow-how-to-fix-this
+
+#include <unistd.h>
+
+void ft_print_alphabet(void) {
+	write(1,"abcdefghijklmnopkqrstuvwxyz",26);
+
+}
+
+int main() {
+ ft_print_alphabet();
+}
+A VERY IMPORTANT NOTE WHEN USING EXTERNAL VARIABLE FROM TERMINAL:
+
+Mention a variable like in the line of code in our shell file:
+
+#!/bin/sh
+cat /etc/passwd | grep -v '^#' | awk 'NR%2==0' | awk -F: '{print $1}'|rev | sort -r | sed -n "${FT_LINE1},${FT_USER2}p" | perl -pe 's/\n/, /g'| sed 's/, $/./' ; echo| cat -e 
+
+mac@macwind shell1repo % ./r_dwssap.sh 
+sed: 1: ",p": invalid command code ,
+$
+
+THE SOLUTION: 
+https://unix.stackexchange.com/questions/278357/setting-variables-from-shell-how-to-use-them-in-a-script
+
+It won’t return any result because simply even if mentioning our var in the cmd line in the terminal, the shell file can’t recognise it.
+
+mac@macwind shell1repo % FT_LINE1=7 FT_LINE2=10 ./r_dwssap.sh
+tocevod_, tessaelibom_, svc_, stneveelppa_.$
+
+Or MORE EFFICIENT using export vars
+
+mac@macwind shell1repo % export FT_LINE1=7
+mac@macwind shell1repo % export FT_LINE2=15
+mac@macwind shell1repo % vi r_dwssap.sh    
+mac@macwind shell1repo % ./r_dwssap.sh                       
+tocevod_, tessaelibom_, svc_, stneveelppa_, sstq_, srotcetedatad_, sorebrek_brk_, soibten_, sergtsop_.
+mac@macwind shell1repo % 
+
+PB SOLVED YAY
+
+
+
+
+EXERCICE 8 add_chelou.sh
+
+Write a command line that takes numbers from variables FT_NBR1, in ’\"?! base, and FT_NBR2, in mrdoc base, and displays the sum of both in gtaio luSnemf base. 
+First we need to understand the code:
+
+The number hidden in FT_NBR1 and FT_NBR3 are the 5base, since mrdoc and ’\"?! Are composed by 5 characters so for example if we have FT_NBR2=rcrdmddd, it stands for 14120222.
+And my idea is like this f.g:
+
+mac@macwind ~ % echo "obase=10;ibase=5;10321201" | bc
+88926
+mac@macwind ~ % echo "obase=10;ibase=5;14120222" | bc
+145062
+mac@macwind ~ % echo 88926+145062| bc
+233988
+mac@macwind ~ % echo "obase=13;ibase=10;233988" | bc
+82671
+
+Those lines of code, turn numbers in the input base (ibase) into numbers in the output base, we use 13 base at the finale, since the demanding base contains 13 characters.
+Note that the order of obase ibase is very important in the cmd: 
+echo "obase=13;ibase=10;233988" | bc 
+bc stands for mathematical operations, it’s very important to add it after a pipe. So the cmd line will recognise the mathematical operations, the 2nd code for eg is for addition purpose:
+
+
+IMPORTANT NOTE:
+
+mac@macwind ~ % FT_NBR1=\\\'?\"\\\"\'\\
+mac@macwind ~ % echo $FT_NBR1
+\'?"\"'\
+
+To express any special char like ‘ “ \ we need to write \ before each char.
+
+
+THE ALGORITHM:
+
+	1.	Take the summ of the two variabes
+	2.	Convert to numbers (in base 5) ( will need to consider special characterd for the first givn base.
+	3.	Run the sum by using the bd
+	4.	Convert to the base 13
+	5.	Convert to characters
+
+the 1. 2. 3. :
+mac@macwind ~ % echo $one + $two | tr 'mrdoc' '01234' | tr '?!' '34' | tr '\\' '1' | tr '\"' '2'| tr "\'" '0' | bc
+24441423
+
+The update pf 1,2,3,4:
+
+mac@macwind ~ % echo "obase=13;ibase=5;$(echo $one + $two | tr 'mrdoc' '01234' | tr '?!' '34'  | tr "\'" '0' | tr '\\' '1' | tr '\"' '2')" | bc              
+
+Remebember we need to use parentheses and quotes before the echo in the third argument to convert the base (“echo …”) 
+
+The last step:
+
+mac@macwind ~ % echo "obase=13;ibase=5;$(echo $FT_NBR1 + $FT_NBR2 | tr 'mrdoc' '01234' | tr '?!' '34'  | tr "\'" '0' | tr '\\' '1' | tr '\"' '2')" | bc | tr '0123456789ABC' 'gtaio luSnemf'
+
+
+
+
+#include <unistd.h>
+
+void ft_print_alphabet(void) {
+	write(1,"abcdefghijklmnopkqrstuvwxyz",26);
+
+}
+
+int main() {
+ ft_print_alphabet();
+}
+##c00
+
+EX01  ft_putchar.c
+Write a character that displays the character passed as a parameter.
+It will be prototyped as follows :
+void ft_putchar(char c);
+To display the character, you must use the function write function as follows.
+write(1, &c, 1);
+
+https://teletype.in/@udarcs/Wi-zMI77GHF
+
+NOTE:
+To paste text from the vim editor to an external text editor and the terminal,  must use the “+y” after selection the text from the vim editor.
+
+In the ft_putchar.c file: 
+
+#include <unistd.h>
+
+void ft_putchar(char c) {
+  write(1,&c,1);
+}
+
+NOTE:
+To run the program we need to add the line of main() function after the lines of code:
+int main() {
+	ft_putchar();
+	return 0;
+} 
+
+
+EX01 ft_print_alphabet.c
+
+#include <unistd.h>
+
+void ft_print_alphabet(void) {
+	write(1,"abcdefghijklmnopkqrstuvwxyz",26);
+
+}
+
+int main() {
+ ft_print_alphabet();
+}
+
+In write(), we use quotation “ “ and not singe quote ‘ ’.
+To run the program we can use this easy compilation:
+gcc -W -W -W ft_putchar.c chmod && +x a.out && ./a.out
+
+ANOTHER METHODE FOR THIS FUNCTION:
+
+#include <unistd.h>
+
+void ft_print_alphabet(void) {
+	char l = 'a';
+	while( l <= 'z'){
+		write(1,&l,1);
+		l++;
+	}
+}
+
+int main(){
+	ft_print_alphabet();
+	return 0;
+}
+
+Remember to use pointer’s var in the write function ,n to avoid buffer pb, remember that we can iterate alphabet characters, so that’s why we are using the l++ line of code, and same for l <= ‘z’
+
+
+EX02 ft_print_reverse_alphabet(void) 
+
+#include <unistd.h>
+
+void ft_print_reverse_alphabet(void) {
+	char l = 'z';
+	while( l >= 'a'){
+		write(1,&l,1);
+		l--;
+	}
+}
+
+
+EX03 ft_print_numbers
+
+
+
+This code won’t return anything in the command:
+
+#include <unistd.h>
+
+void ft_print_numbers(void){
+	int x=0;
+	while (x<=9){
+		write(1,&x,1);
+		x++;	
+}
+}
+
+int main(){
+ ft_print_numbers();
+}
+
+
+Note that the write() function is taking character arguments, and not the int one, so we need to change the type of the variable x into character, like char x; Also, remember to use the “..” instead of ‘..’
+
+
+But also this code is wrong:
+
+#include <unistd.h>
+
+void ft_print_numbers(void){
+	char x=0;
+	while (x<=9){
+		write(1,&x,1);
+		x++;	
+}
+}
+
+int main(){
+ ft_print_numbers();
+}
+
+We need to add the quotation marques:
+
+#include <unistd.h>
+
+void ft_print_numbers(void){
+	char x=‘0’;
+	while (x<=‘9’){
+		write(1,&x,1);
+		x++;	
+}
+}
+
+int main(){
+ ft_print_numbers();
+}
+
+
+This CODE WORKS
+
+mac@macwind exercices % gcc -W -W -W ft_print_numbers.c && ./a.out
+0123456789% 
+
+
+EX04 ft_is_negative.c
+
+
+For testing:
+
+#include <unistd.h>
+#include <stdio.h>
+
+void ft_is_negative(int n) {
+	if (n < 0)
+		write(1,"N",1);
+	else write(1,"P",1);
+
+}
+
+int main() {
+	int n;
+	puts("Enter your number: ");
+	scanf("%d",&n);
+	ft_is_negative(n);
+	return 0;
+}
+
+
+OR ANOTHER METHOD
+
+#include <unistd.h>
+#include <stdio.h>
+
+void ft_is_negative(int n) {
+	write(1,(n<0)?"N":"P",1);
+}
+
+int main() {
+	int n;
+	puts("Enter your number: ");
+	scanf("%d",&n);
+	ft_is_negative(n);
+	return 0;
+}
+
+For returning the 42 file:
+
+#include <unistd.h>
+
+
+void ft_is_negative(int n) {
+	write(1,(n<0)?"N":"P",1);
+
+}
+
+mac@macwind exercices % gcc -W -W -W ft_is_negative.c && ./a.out
+Enter your number: 
+764
+P%                                                                                                 mac@macwind exercices % gcc -W -W -W ft_is_negative.c && ./a.out
+Enter your number: 
+0
+P%                                                                                                 mac@macwind exercices % gcc -W -W -W ft_is_negative.c && ./a.out
+Enter your number: 
+-76
+N%
+
+
+To paste outside the vim editor: we need to do quotation with plus with the y “+y
+
+
+
+EX05 ft_print_comb.c
+
+
+Understand the algo: 
+Bsically we have 3 digits xyz, to write all the combos without repetition we in ascending way, we need to understand from writing the first data, we notice that we need to assign to start the z count each times with y+1 if z exceed 9, and same for y if it exceeds 8, assign it the value of x+1, without forgeting to increment the value of z each time, and if it reaches the number 9, increment the y value by 1 too. 
+
+#include <unistd.h>
+#include <stdio.h>
+
+
+void two(void){
+
+	char t[5];
+	*t = '0';
+	t[1]= '1';
+	t[2]= '2';
+	t[3]=',';
+	t[4]=' ';
+
+	while (*t < '8'){
+
+		write(1,t,(*t < '7')? 5:3);
+		t[2]++;              
+		if (t[2]>'9'){       /* we can use also ++t[2] but we need to omit ans delete the line of t[2] because with this line can do the work  */
+			t[1]++;
+			if ( t[1]> '8') {
+				(*t)++;   /* Remenber to add () parentheses between the pointer */
+				t[1] = *t +1;
+                        }
+			t[2]=t[1]+1;
+                 }
+	}
+
+}	
+
+int main() {
+	two();
+	return 0;
+}
+
+
+
+mac@macwind exercices % gcc -W -W -W two.c
+mac@macwind exercices % ./a.out           
+012, 013, 014, 015, 016, 017, 018, 019, 023, 024, 025, 026, 027, 028, 029, 034, 035, 036, 037, 038, 039, 045, 046, 047, 048, 049, 056, 057, 058, 059, 067, 068, 069, 078, 079, 089, 123, 124, 125, 126, 127, 128, 129, 134, 135, 136, 137, 138, 139, 145, 146, 147, 148, 149, 156, 157, 158, 159, 167, 168, 169, 178, 179, 189, 234, 235, 236, 237, 238, 239, 245, 246, 247, 248, 249, 256, 257, 258, 259, 267, 268, 269, 278, 279, 289, 345, 346, 347, 348, 349, 356, 357, 358, 359, 367, 368, 369, 378, 379, 389, 456, 457, 458, 459, 467, 468, 469, 478, 479, 489, 567, 568, 569, 578, 579, 589, 678, 679, 689, 789%                                         mac@macwind exercices % 
+
+
+EX06 ft_print_comb2.c
+
+#include <stdio.h>
+#include <unistd.h>
+
+void two(void) {
+	char t[7];
+	*t = '0';
+	t[1]= '0';
+	t[2]= ' ';
+	t[3]= '0';
+	t[4]= '1';
+	t[5]= ',';
+	t[6]= ' ';
+
+while( *t <='9'){
+    
+	if ( t[4] == '9') {
+		
+		if (t[3] == '9') { 
+		  
+		  if (t[1] == '9'){
+
+			write(1,t,7);
+			(*t)++;
+			t[1] = '0';
+			t[3] = *t;
+			t[4] = '1';
+		  }
+		  else {
+			write(1,t,7);
+	    	t[1]++;
+			if ( t[1] != '9') {
+		     t[3] = *t;
+			 t[4] = t[1] + 1;
+			}
+			else {
+				t[3] = *t + 1;
+				t[4] = '0';
+			}
+			 
+		  }
+		}
+		else {
+			write(1,t,7);
+			t[4] = '0';
+			t[3]++;
+		}
+	}
+	else {
+		write(1,t,7);
+		t[4]++;
+	}
+	if ( *t == '9' && t[3] == '9' && t[4] == '9') {
+		write(1,t,5);
+		break;
+	}
+}
+}
+
+int main() {
+  	two();
+	return 0;
+}
+
+I notice all the numbers after the 9 and turn what I notice into a code.
+
+
+EX07 ft_putnbr.c
+
+#include <stdio.h>
+#include <unistd.h>
+
+void ptchar(char c) {
+    write(1,&c,1);
+}
+
+void ptnum(int n) {
+    int d = 1;
+    if ( n < 0 ){
+      ptchar('-');
+      n = -n;
+    }
+
+    int p = n;
+    int count = 0;
+
+    do {                    /* at first we count how many digits the number is */ 
+        n /= 10;
+        ++count;
+    } while (n !=0);
+
+    if ( count == 1) {
+        ptchar(n*1+'0');
+    }
+    else {
+        count--;             /*we determinat the biggest power of 10 that devide the number */
+        while (count > 0){
+            d *= 10;
+            count--;
+        }
+        while ( d >= 1){    /*we start to print the quotient of the number and the power of 10*/
+            ptchar(p/d +'0');
+            p %= d;
+            d /= 10;
+        }
+    }
+
+
+}
+int main() {
+    int n;
+    n = -998;
+    ptnum(n);
+
+}
+
+
+EX08 ft_print_combn(int n)
+
+#include <unistd.h>
+#include <stdio.h>
+
+void    ft_print_combn(int n)
+{
+    char    t[11];
+    int     i;
+
+    if (n < 1 || n > 9)
+        return ;
+    *t = '0';
+    i = 0;
+    while (++i < n)
+        t[i] = t[i - 1] + 1;
+    t[n] = ',';
+    t[n + 1] = ' ';
+    while (*t <= 58 - n)
+    {
+        write(1, t, n + ((*t != 58 - n) ? 2 : 0));
+        i = n;
+        while (i){
+		   i—-;
+            if (++t[i] <= 58 - n + i)
+             break ;
+       }
+        while (++i < n)
+            t[i] = t[i - 1] + 1;
+    }
+}
+
+int main() {
+    ft_print_combn(2);
+    ft_print_combn(3);
+    ft_print_combn(4);
+    
+}
+
+
+
+
+## C01
+
+
+REMEMBER:
+To turn numbers from 0 to 9 into char so it can be used in the write() function:
+
+#include <stdio.h>
+#include <unistd.h>
+
+#convert one number to character using write
+void ft_putchar(char c) {
+  write(1,&c,1);
+}
+
+int main(){
+ 
+ int n;
+ n = 5;
+ ft_putchar(n*1+'0');
+
+}
+
+
+EX00 ft_ft.c
+
+void ft_ft(int *nbr) {
+	*nbr = 42;
+}
+
+
+EX01 ft_ultimate_ft.c
+
+void ft_ultimate_ft(int *********nbr) {
+	*********nbr = 42;
+}
+
+EX02 ft_swap.c
+
+void  ft_ft(int *a, int *b) {
+   int c;
+   c = *a;
+   *a= *b;
+   *b = c;
+
+    
+}
+
+
+EX03 ft_div_mod.c
+
+void ft_div_mod(int a, int b, int *div, int *mod){
+    int q, r;
+    q = a/b;
+    r = a%b;
+    *div = q;
+    *mod = r;
+}
+
+EX04 ft_ultimate_div_mod.c
+
+void ft_div(int *a, int *b){
+    int c;
+    c = *b;
+    *b = (*a)/(*b);
+    *a = (*a)%c;
+
+}
+
+EX05 ft_putstr.c
+
+
+#include <stdio.h>
+#include <unistd.h>
+
+void ft_str(char *c){
+    
+    //printf("%s\n",c+1);
+    //write(1,c,1);            //we mustn't use the write(1,*c;1) it returns error since 2nd arg is buffer  
+    //write(1,c+1,1);
+   // write(1,c+2,1);
+    int n = 0;
+    while ( c[n] != '\0') {    // c[1] will be showing blddlc and c[5] will e showing land so on..
+        write(1,c+n,1);
+        n++;
+    }
+       
+}
+
+int main(){
+    char c[] = "ablddlc";
+    ft_str(c);
+}
+
+
+Remember: 
+we need to use this: write(1,c,1) instead of write(1,*c,1).
+write(1,c+1,1) returns in this example b since c+1 returns blddlc, same for c[1]
+
+
+EX06 ft_strlen.c
+
+#include <stdio.h>
+#include <unistd.h>
+
+void putint(char c, int n){
+    write(1,&c,n);
+}
+int ft_str(char *c){
+    int n = 0;
+
+    while (c[n]) {   
+        n++;
+    }  
+    return n;
+}
+
+int main(){
+    char c[] = "abl";
+    printf("%d\n",ft_str(c));   //we return a function with its arg and not an int lllòòll
+}
+
+
+
+EX07 ft_rev_int_tab()
+
+Remember:
+
+_To return a variable in a function, we need to use char if its a value or int if it’s a number or int * if it’s an array and not void. Also to return a new array we must declare the array inside the function with static, since it will return this error:
+tempCodeRunnerFile.c:7:12: warning: address of stack memory associated with local variable 'rev' returned [-Wreturn-stack-address]
+    return rev;
+
+Read: https://stackoverflow.com/questions/18041100/using-c-string-gives-warning-address-of-stack-memory-associated-with-local-var
+
+_Also this array inside the function should have a defined length and not a variable as an len, it returns an error else wise: 
+tempCodeRunnerFile.c:4:16: error: variable length array declaration cannot have 'static' storage duration
+    static int rev[size];
+
+Read: https://stackoverflow.com/questions/10675399/why-cant-the-size-of-a-static-array-be-made-variable
+
+
+FIRST METHOD:
+
+#include <stdio.h>
+
+int * ft_rev_int_tab(int *tab, int size) {
+    int rev[size];
+    for (int i=0;i < size; i++)
+        rev[i] = tab[size - i -1];
+    for (int i = 0; i < size; i++) 
+       tab[i] = rev[size - i -1];
+    return tab;
+}
+
+int main(){
+    int size = 4;
+    int tab[size];
+    tab[0] = 1;
+    tab[1] = 2;
+    tab[2] = 3;
+    tab[3] = 4; 
+    ft_rev_int_tab(tab,size);
+    
+ }
+
+2nd method:
+
+#include<stdio.h>
+
+void swap(int *a, int *b){
+    int c;
+    c = *b;
+    *b = *a;
+    *a = c;
+
+}
+void ft_rev_int_tab(int *tab, int size){
+    int step=0;
+    
+    while(--size > step) 
+      swap(&tab[step++],&tab[size]);
+    
+}
+
+int main(){
+    int size = 5;
+    int tab[size];
+    tab[0] = 1;
+    tab[1] = 2;
+    tab[2] = 3;
+    tab[3] = 4; 
+    tab[4] = 5;
+    
+    ft_rev_int_tab(tab,size);
+    for (int i = 0; i < size; i++) 
+      printf("%d", tab[i]);
+
+}
+
+In this method, we use the algorithm that swap the two array’s elements from the first position to the end. The only method to stop the loop is that the step will go up more that the size.
+
+We write:
+Syntax on in .vimrc file to have highlights in the vim codes.
+
+
+
+EX08 ft_sort_int_tab.c
+
+
+#include <stdio.h>
+
+void swap(int *a, int *b){
+    
+    int c;
+    c = *b;
+    *b = *a;
+    *a = c;
+
+}
+void ftsort(int *tab, int size){.  ##the algo is to compare between two values and set the count to 0, so it counts again until all the values got updated.
+    
+    int i=0;
+    while(i < size) {       
+
+       if ( tab[i+1] < tab[i]) {
+         swap(&tab[i],&tab[i+1]);
+         i = 0;
+       }
+        else i++;
+    }
+    
+}
+
+int main(){
+    int size = 5;
+    int tab[size];
+    tab[0] = 0;
+    tab[1] = -4; 
+    tab[2] = -3;
+    tab[3] = 59; 
+    tab[4] = 1;   
+    
+    ftsort(tab,size);
+    for (int i = 0; i < size; i++) 
+      printf("%d", tab[i]);
+
+}
+
+
+I faced a pb: /bin/sh: line 1:  2192 Segmentation fault: 11  "/Users/mac/Desktop/Exercices/testcode/"tempCodeRunnerFile
+ concerning the null and negative value when setting the if statement to:  if ( tab[i] < tab[i-1]). But it’s fixed when turning it to : if ( tab[i+1] < tab[I]).
+
+
+2nd method:
+
+Pivot algorithm method:
+
+
+https://www.programiz.com/dsa/quick-sort#:~:text=An%20array%20is%20divided%20into,right%20side%20of%20the%20pivot.
+
+
+#include <stdio.h>
+
+void    ft_swap(int *a, int *b)
+{
+    int c;
+
+    c = *a;
+    *a = *b;
+    *b = c;
+}
+
+void    ftsort(int *tab, int size)
+{
+    int pivot;
+    int i;
+    int j;
+
+    if (size < 2)
+        return ;
+    pivot = tab[--size];
+    i = 0;
+    j = -1;
+    while (++j < size)
+        if (tab[j] < pivot)
+            ft_swap(&tab[i++], &tab[j]);
+    if (tab[i] > tab[size])
+        ft_swap(&tab[i], &tab[size]);
+    ftsort(tab, i);
+    ftsort(tab + i + 1, size - i);
+}
+
+
+int main(){
+    int size = 4;
+    int tab[size];
+    tab[0] = 8;
+    tab[1] = 4; 
+    tab[2] = -2;
+    tab[3] = 3;
+    
+    
+    ftsort(tab,size);
+    for (int i = 0; i < size; i++) 
+      printf("%d", tab[i]);
+
+}
+
+
+
+##C02
+
+
+
+Remember to return array[i], or use it in a function that takes a pointer like most of the exercises, we must use &array[i].
+
+
+EX00 ft_strcpy
+
+strcpy() is a standard library function in C/C++ and is used to copy one string to another. In C it is present in string.h header file and in C++ it is present in cstring header file. 
+Return Value: After copying the source string to the destination string, the strcpy() function returns a pointer to the destination string.
+
+#include <stdio.h>
+#include <unistd.h>
+
+ char    *ft_strcpy(char *dest, char *src) {
+  int i=0;
+
+  do{ 
+    dest[i] = src[i];
+  }while(dest[++i]);
+  dest[i] = '\0';
+  return dest;
+}
+
+int main()
+{
+    int i;
+    char b[40] = "Hi there";
+    char a[40];
+    ft_strcpy(a,b);
+    for (i=0;i<40;i++){
+      write(1,a+i,1);
+    }
+}
+
+
+EX01 ft_strncpy
+
+The C library function char *strncpy(char *dest, const char *src, size_t n) copies up to n characters from the string pointed to, by src to dest. In a case where the length of src is less than that of n, the remainder of dest will be padded with null bytes.
+
+#include <stdio.h>
+#include <unistd.h>
+
+char    *ft_strncpy(char *dest, char *src, unsigned int n)
+{
+    int i=0;
+
+    do{ 
+        dest[i] = src[i];
+    }while(++i<n && src[i]);
+        while (i<n)
+        dest[i++] = '\0';
+
+    return dest;
+}
+    
+
+int main()
+{
+    int i;
+    char b[40] = "Hi there";
+    char a[40];
+    ft_strncpy(a,b,4);
+    for (i=0;i<40;i++){
+      write(1,a+i,1);
+    }
+}
+
+EX02 ft_str_is_alpha
+
+Create a function that returns 1 if the string given as a parameter contains only alphabetical characters, and 0 if it contains any other character.
+
+int ft_str_is_alpha(char *str)
+{
+  int i;
+  i = -1;
+  if (!(str[0])) return 0; //c'est l'expression d'une chaine vide
+  while(str[++i]) {
+    if ((str[i]>= 65 && str[i] <= 90) || (str[i]>= 97 && str[i] <= 122))
+      continue;
+    else return 0;
+  }
+  return 1;
+}
+
+EX03 ft_str_is_numeric
+
+Create a function that returns 1 if the string given as a parameter contains only digits, and 0 if it contains any other character.
+
+#include <stdio.h>
+
+    int ft_str_is_numerci(char *str){
+        
+        while(*str){
+            if ((*str)>='0' && (*str) <= '9')
+              str++;
+            else return 0;
+        }
+
+        return 1;
+
+    }
+int main(){
+    char b[] = "123443";
+    int i;
+    i = ft_str_is_numerci(b);
+    printf("%d",i);
+
+}
+
+EX04 ft_str_is_lowercase
+
+Create a function that returns 1 if the string given as a parameter contains only lowercase alphabetical characters, and 0 if it contains any other character.
+#include <stdio.h>
+
+int ft_str_is_lowercase(char *str) {
+    int i=-1;
+    while (str[++i]) {
+        if ( str[i] >= 'a' && str[i] <= 'z' )
+          continue;
+        else return 0;
+    }
+
+    return 1;
+
+}
+
+int main()
+{
+    int i;
+    char b[40] = "abcds";
+    i=ft_str_is_lowercase(b);
+    printf("%d", i);
+
+}
+
+
+EX05 ft_str_is_uppercase
+
+Create a function that returns 1 if the string given as a parameter contains only uppercase alphabetical characters, and 0 if it contains any other character.
+
+#include <stdio.h>
+
+int ft_str_is_uppercase(char *str) {
+    int i=-1;
+    while (str[++i]) {
+        if ( str[i] >= 'A' && str[i] <= 'Z' )
+          continue;
+        else return 0;
+    }
+
+    return 1;
+
+}
+
+int main()
+{
+    int i;
+    char b[40] = "JKDCSJ";
+    i=ft_str_is_uppercase(b);
+    printf("%d", i);
+
+}
+
+EX06  ft_str_is_printable
+
+Create a function that returns 1 if the string given as a parameter contains only printable characters, 
+and 0 if it contains any other character.
+//http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm
+
+#include <stdio.h>
+    
+int ft_str_is_printable(char *s){
+    int i = -1;
+    while(s[++i]){
+        if( s[i] >= 32 && s[i]<= 127)
+            continue;
+        return 0;
+    }
+    return 1;
+    
+}
+
+int main(){
+
+    char b[] = "    ";   //we assigned tab to b so the program will return 0
+    int i;
+    i = ft_str_is_printable(b);
+    printf("%d",i);
+
+}
+
+EX07 ft_strupcase
+
+Create a function that transforms every letter to uppercase.
+#include <stdio.h>
+#include <unistd.h>
+
+char *ft_strupcase(char *str) {
+    int i=0;
+
+    do{
+       if ( str[i] >= 97 && str[i] <= 122)
+        str[i]-=32;
+
+    }while(str[++i]);
+
+    return str;
+
+}
+
+int main() {
+    char b[40] = "Hi there 1272 ghdj jjsn HJKSKJ jjs";
+    ft_strupcase(b);
+    for (int i=0;i<40;i++){
+      write(1,b+i,1);
+    }
+
+}
+
+
+EX08 ft_strlowcase
+
+Create a function that transforms every letter to lowercase.
+
+#include <stdio.h>
+#include <unistd.h>
+
+char *ft_strlowercase(char *str) {
+    int i=0;
+
+    do{
+       if ( str[i] >= 65 && str[i] <= 90)
+        str[i]+=32;
+
+    }while(str[++i]);
+
+    return str;
+
+}
+
+int main() {
+    char b[40] = "Hi there 1272 ghdj jjsn HJKSKJ jjs";
+    ft_strlowercase(b);
+    for (int i=0;i<40;i++){
+      write(1,b+i,1);
+    }
+
+}
+
+
+EX09 ft_strcapitalize
+
+Create a function that capitalizes the first letter of each word and transforms all other letters to lowercase.
+#include <stdio.h>
+#include <unistd.h>
+
+char ft_strupcase(char *str) {
+
+     if ( *str >= 97 && *str <= 122)
+        *str -=32;
+
+    return *str;
+
+}
+
+int ft_str_is_numerci(char *str){
+        
+    if ((*str)>='0' && (*str) <= '9')
+        return 1;
+
+    return 0;
+}
+
+int ft_str_is_alpha(char *str)
+{
+  
+    if ((*str>= 65 && *str <= 90) || (*str >= 97 && *str <= 122))
+      return 1;
+
+    return 0;
+}
+
+char    *ft_strcapitalize(char *str) {
+    
+    int i=0;
+    ft_strupcase(&str[0]);
+    do {
+        if(!(ft_str_is_numerci(&str[i]) || ft_str_is_alpha(&str[i])))
+            ft_strupcase(&str[i+1]);
+        }while(str[++i] && str[i+1] != '\0');
+
+    return str;
+    
+
+}
+
+int main()
+{
+    int i;
+    char b[100] = "salut, comment tu vas ? 42mots quarante-deux; cinquante+et+un";
+
+     //printf("%d",ft_str_is_numerci(&b[5]));
+   ft_strcapitalize(b);
+    for (i=0;i<100;i++)
+       write(1,b+i,1);
+    
+
+}
+
+EX10 ft_strlcpy
+
+https://documentation.help/Cpp/strlcpy.htm
+The strlcpy() function copies up to size − 1 characters from the NUL-terminated string src to dst, NUL-terminating the result.
+It returns the len of the source array.
+#include <stdio.h>
+#include <unistd.h>
+
+
+int ft_strlen(char *str) {
+
+    int n;
+    n = 0;
+    while(str[n]) n++;
+    return n;
+    }
+
+unsigned int ft_strlcpy(char *dest, char *src, unsigned int size){
+
+    unsigned int len;
+    len = ft_strlen(src);
+    
+    unsigned int j;
+
+    if (len < size -1) {
+        j = -1;
+        while( ++j < len+1)
+            dest[j] = src[j];
+    }
+
+    else if (size)
+
+    {
+        j=-1;
+        while(++j<size -1)
+            dest[j] = src[j];
+        dest[j] = '\0';
+
+    }
+
+    return len;
+
+
+}
+
+int main()
+{
+    int i;
+    char b[8] = "Hi there";
+    char a[5]= "abcde";
+    ft_strlcpy(b,a,8);
+  // ft_strncpy(a,b,4);
+    for (i=0;i<8;i++){
+      write(1,b+i,1);
+    }
+}
+
+
+EX11 ft_putstr_non_printable
+
+Create a function that displays a string of characters onscreen. If this string contains characters that aren’t printable, they’ll have to be displayed in the shape of hexadecimals (lowercase), preceeded by a "backslash”.
+
+Notes:
+
+//to turn hexadecimal number of 2 digits from decimal one:
+//we use the 16 base “0123456789abcdef” in this case since we want it lowercase, the first digit will be the quotient of 16 and the number in the 16base and the 2nd will be the reminder
+//we can compare *array to ascii 
+//always use ' ' not "" for functions that take char as arg
+// the non printable are *str <= 31 || *str >= 127, 127 stands for delete.
+
+#include <stdio.h>
+#include <unistd.h>
+
+void    ft_putchar(char c)
+{
+    write(1, &c, 1);
+}
+
+
+void ft_putstr_non_printable(char *str){
+
+    while(*str){
+        if ( *str <= 31 || *str >= 127)   {
+            ft_putchar('\\');
+            ft_putchar("0123456789abcdef"[*str/16]);
+            ft_putchar("0123456789abcdef"[*str%16]);
+        }
+        else ft_putchar(*str);  
+
+        str++;
+    }
+}
+
+
+
+
+int main()
+{
+    char tab[100] = "Coucou\ntu vas bien";
+    ft_putstr_non_printable(tab);
+}
+
+
+EX12 ft_print_memory
+
+Create a function that displays the memory area onscreen. 
+• The display of this memory area should be split into three "columns" separated by a space : 
+◦ The hexadecimal address of the first line’s first character followed by a ’:’. 
+◦ The content in hexadecimal with a space each 2 characters and should be padded with spaces if needed (see the example below). 
+◦ The content in printable characters. 
+• If a character is non-printable, it’ll be replaced by a dot. 
+• Each line should handle sixteen characters. 
+• If size equals to 0, nothing should be displayed.
+
+Note:
+
+//pointers to memory location should be of type "void * by default.
+//https://www.educative.io/answers/what-is-a-buffer-in-c  buffer and to clear it
+//return the address of pointer using write without %p or print:
+https://stackoverflow.com/questions/48066271/how-to-print-a-pointer-address-without-printf
+//understand the bytes with the bitwise expression:
+https://medium.com/android-news/java-when-to-use-n-8-0xff-and-when-to-use-byte-n-8-2efd82ae7dd7
+//the use of the code between int j = in above in medium website
+//unsigned char is a character datatype where the variable consumes all the 8 bits of the memory and there is no sign bit (which is there in signed char). So it means that the range of unsigned char data type ranges from 0 to 255.
+//check https://www.geeksforgeeks.org/unsigned-char-in-c-with-examples/#:~:text=unsigned%20char%20is%20a%20character,ranges%20from%200%20to%20255.
+// we use unsigned char in the ft_hex, because we are dealing with binary data Use char when you are dealing with ascii characters.
+//Use unsigned char when you are dealing with binary data (say, the contents of a binary file or raster image).
+
+#include <stdio.h>
+#include <unistd.h>
+
+void    ft_putchar(char c)
+{
+    write(1, &c, 1);
+}
+
+void ft_hex(unsigned char c) {
+    char *base;
+    base = "0123456789abcdef";
+    ft_putchar(base[c / 16]);
+    ft_putchar(base[c % 16]);
+
+}
+void ft_print_data(char *s, unsigned int size){
+    unsigned int i;
+    i = -1;
+    while (++i < size) {
+        if (!(i%2))
+            ft_putchar(' ');
+        ft_hex(s[i]);
+    }
+    while (i < 16)
+        write(1,"   ",(i++ % 2) ? 2 : 3);
+    ft_putchar(' ');
+    i = -1;
+    while(++i < size)
+        ft_putchar((s[i] < ' ' || s[i] == 127) ? '.' : s[i]);
+
+    }
+
+void    *ft_print_memory(void *addr, unsigned int size)
+{
+    unsigned int    i=0;
+   
+    while(i < size) {
+         int j = 56;
+         while ((j -= 8) >= 0)
+            ft_hex((unsigned long int)(addr + i) >> j & 0xff);
+        ft_putchar(':');
+        ft_print_data(addr + i, (size-i < 16) ? size -i :16);
+        ft_putchar('\n');
+        i += 16;
+    }
+    return addr;
+
+}
+
+
+
+int  main(){
+   void *addr = "qwerf  tyuioplkmnjhhffr jlkuilosdkjjskldlkdsklsdlkdkkdskkldskldkdskldskmn     joaihuwipjed bedwwd   iowiejdn jsdddd";
+   ft_print_memory(addr, 200);
+
+}
+
+
+##C03
+
+
+EX00 ft_strcmp
+
+https://www.geeksforgeeks.org/strcmp-in-c-cpp/
+
+
+#include <stdio.h>
+#include <unistd.h>
+
+int ft_strcmp(char *s1, char *s2){
+    int i = 0;
+    
+    while((s1[i]-  s2[i]) == 0 && s1[i] != '\0')
+       i++;       
+    return s1[i] - s2[i];
+
+}
+
+int main(){
+    char s1[20] ="abc";
+    char s2[20] = "abc";
+    printf("%d",ft_strcmp(s1,s2));
+
+}
+
+EX01 ft_strncmp
+
+https://www.geeksforgeeks.org/stdstrncmp-in-c/
+
+
+//we do until n-2, because the last assignment is n-1, since we increment i
+
+
+#include <stdio.h>
+#include <unistd.h>
+
+
+int ft_strcmp(char *s1, char *s2, unsigned int n){
+    int i = 0;
+    
+    while(((s1[i] -  s2[i]) == 0) && s1[i] && i < n-1) 
+       ++i;
+    
+    return s1[i] - s2[i];
+
+}
+
+
+int main(){
+    char s1[20] ="abc";
+    char s2[20] = "abcrjkdl";
+    printf("%d",ft_strcmp(s1,s2,3));
+
+}
+
+
+EX02 ft_strcat
+
+https://www.programiz.com/c-programming/library-function/string.h/strcat
+
+#include <stdio.h>
+#include <unistd.h>
+
+char *ft_strcat(char *dest, char *src ){
+    int i = 0;
+    int j = -1;
+    while(dest[i])
+      i++;
+    while(src[++j])
+      dest[i+j] = src[j];
+
+    dest[i+j] ='\0';
+    return dest;
+}
+
+
+int main(){
+    char dest[20] ="abcq";
+    char src[20] = " hellofggg";
+
+    ft_strcat(dest,src);
+    for (int i=0; i<20; i++)
+      printf("%c",dest[i]);
+
+}
+
+
+EX03 ft_strncat
+
+
+//pay atttention to the end of array the '\0'
+
+
+#include <stdio.h>
+#include <unistd.h>
+
+
+char *ft_strncat(char *dest, char *src, unsigned int nb ){
+    int i = 0;
+    int j = -1;
+    while(dest[i])
+      i++;
+    while(src[++j] && j < nb)
+      dest[i+j] = src[j];
+
+    dest[i+j] ='\0';
+    return dest;
+}
+
+
+int main(){
+    char dest[20] ="abcq";
+    char src[20] = "hellofggg";
+
+    ft_strncat(dest,src, 3);
+    for (int i=0; i<20; i++)
+      printf("%c",dest[i]);
+
+}
+
+
+EX04 ft_strstr
+
+https://www.geeksforgeeks.org/strstr-in-ccpp/ 
+
+1st method using ft_strcmp, to check if all patterns are the same.
+
+#include <stdio.h>
+#include <unistd.h>
+
+int str_len(char *c){
+    int n = 0;
+    while (c[n])
+     n++;
+    return n;
+}
+
+int ft_strcmp(char *s1, char *s2, unsigned int n){
+    int i = 0;
+    
+    while(((s1[i] -  s2[i]) == 0) && s1[i] && i < n-1) 
+       ++i;
+    
+    return s1[i] - s2[i];
+
+}
+char *ft_strstr(char *src, char *to_find){
+
+    if (!(*to_find)) return src;
+
+    int len = str_len(to_find);
+
+    int i = 0;
+    int j;
+    while(src[i]) {
+        if ((ft_strcmp(to_find,&src[i],len)) == 0)
+            return &src[i];
+        else i++;
+    }
+    return "0";
+}
+
+int main(){
+    char dest[20] = "Geeksforfgeeeks";
+    char src[20] = "fge";
+
+    char *p = ft_strstr(dest,src);
+    for (int i=0; i<20; i++)
+      printf("%c",p[i]);
+
+}
+
+2nd method:
+
+char    *ft_strstr(char *str, char *to_find)
+{
+    int i;
+
+    if (!*to_find)
+        return (str);
+    while (*str)
+    {
+        if (*str == *to_find)
+        {
+            i = 1;
+            while (to_find[i] && str[i] == to_find[i])
+                i++;
+            if (!to_find[i])
+                return (str);
+        }
+        str++;
+    }
+    return (0);
+}
+
+
+
+
+EX05 ft_strlcat.c 
+
+int ft_strlen(char *str)
+{
+    int n = 0;
+    while (str[n])
+        n++;
+    return n;
+
+}
+
+unsigned int ft_strlcat(char *dest, char *src, unsigned int size) {
+
+    unsigned int len_dest = ft_strlen(dest);
+    unsigned int len_src = ft_strlen(src);
+    unsigned int rest;
+
+    if (size > len_dest)
+        rest = len_dest + len_src;
+    else rest = size + len_src;
+
+    while(*src && len_dest + 1 < size){
+        dest[len_dest] = (*src)++;
+        len_dest++;
+
+    }
+    dest[len_dest] = '\0';
+    return rest;
+
+}
+
+
+##C04
+
+EX00 ft_strlen.c
+
+int ft_strlen(char *c){
+    int n = 0;
+    while (*c) { 
+        (++c);
+    n++;
+}
+    return n;
+}
+int main(){
+
+    char str[] = "abc";
+    printf("%d",ft_strlen(str));
+}
+
+Remember to use c++ instead of *c++ *(c + 1) to increment the array. Since doing the first option will increment the address instead of the stored value.
+
+Or we use *(c++), the important is to tell the compiler that we are incrementing the area itself not the pointer.
+
+
+
+EX01 ft_putstr.c
+
+#include <unistd.h>
+#include <stdio.h>
+
+
+void  ft_putchar(char c){
+    write(1,&c,1);
+}
+
+void ft_putstr(char *str){
+
+    while(*str)
+     ft_putchar(*(str++));
+}
+
+int main(){
+
+    char str[] = "abfdfgh1234123455c";
+    ft_putstr(str);
+}
+
+
+
+2nd method using len of the str:
+
+#include <unistd.h>
+#include <stdio.h>
+
+
+int     ft_strlen(char *str)
+{
+    int n;
+
+    n = 0;
+    while (str[n])
+        n++;
+    return (n);
+}
+
+void    ft_putstr(char *str)
+{
+    write(1, str, ft_strlen(str));
+}
+
+int main(){
+
+    char str[] = "abfdfgh1234123455c";
+    ft_putstr(str);
+}
+
+
+
