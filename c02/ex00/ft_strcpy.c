@@ -1,23 +1,27 @@
 #include <stdio.h>
-#include <unistd.h>
+#include <string.h>
+#define MAX_SIZE 32
+//https://stackoverflow.com/questions/69501206/simple-c-program-using-string-h-methods-not-running 
 
- char    *ft_strcpy(char *dest, char *src) {
-  int i=0;
+//to run the string library in c, we must define the MAX_SIZE to 32. 
+//otherwise it's not working with strcpy
 
-  do{ 
-    dest[i] = src[i];
-  }while(dest[++i]);
+char    *ft_strcpy(char *dest, char *src) {
+  int i=-1;
+
+  while(src[++i])
+      dest[i] = src[i];
   dest[i] = '\0';
   return dest;
 }
 
-int main()
+int	main()
 {
-    int i;
-    char b[40] = "Hi there";
-    char a[40];
-    ft_strcpy(a,b);
-    for (i=0;i<40;i++){
-      write(1,a+i,1);
-    }
+	char src[] = "beautiful";
+	char src1[MAX_SIZE] = "beautiful";
+	char dest[] = "Wo";
+	char dest1[MAX_SIZE] = "Wo";
+	printf("%s", ft_strcpy(dest, src));
+	strcpy(dest1, src1);
+  puts(dest1);
 }
