@@ -1,17 +1,11 @@
 #include <stdio.h>
-#include <unistd.h>
+#include <string.h>
 
-int str_len(char *c){
-    int n = 0;
-    while (c[n])
-     n++;
-    return n;
-}
 
-int ft_strcmp(char *s1, char *s2, unsigned int n){
+int ft_find(char *s1, char *s2){
     int i = 0;
     
-    while(((s1[i] -  s2[i]) == 0) && s1[i] && i < n-1) 
+    while(((s1[i] -  s2[i]) == 0) && s1[i+1]) 
        ++i;
     
     return s1[i] - s2[i];
@@ -21,24 +15,20 @@ char *ft_strstr(char *src, char *to_find){
 
     if (!(*to_find)) return src;
 
-    int len = str_len(to_find);
-
     int i = 0;
     int j;
     while(src[i]) {
-        if ((ft_strcmp(to_find,&src[i],len)) == 0)
+        if ((ft_find(to_find,&src[i]) == 0))
             return &src[i];
         else i++;
     }
-    return "0";
+    return 0;
 }
 
-int main(){
-    char dest[20] = "Geeksforfgeeeks";
-    char src[20] = "fge";
-
-    char *p = ft_strstr(dest,src);
-    for (int i=0; i<20; i++)
-      printf("%c",p[i]);
-
+int	main()
+{
+	char str[] = "42 1337 Network 2021 piscine Benguerir Khouribga";
+	char find[] = '\0';
+	printf("%s", ft_strstr(str, find));
+    printf("\n%s", strstr(str, find));
 }
