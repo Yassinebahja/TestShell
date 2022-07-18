@@ -17,8 +17,8 @@ int ft_atoi( char *str){
 		i++;
 	}
 
-	while(str[i] >= 48 && str[i] <= 57){
-		number = (number*10) +(str[i]-48);
+	while(str[i] >= '0' && str[i] <= '9'){
+		number = (number*10) +(str[i]-'0');
 		i++;	
 	}
 
@@ -36,7 +36,7 @@ int ft_atoi( char *str){
 
 int main(){
 
-	char str[] = "		-+-378?iuh987ghj";
+	char str[] = "		-37897783?iuh987ghj";
 	printf("%d",ft_atoi(str));
 	printf("\n%d",atoi(str));
 }
