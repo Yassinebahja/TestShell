@@ -14,8 +14,6 @@ int ft_len(char *str){
 	return len;
 }
 
-
-
 int checkbase(char *str){
 
 	int i = 0;
@@ -27,7 +25,8 @@ int checkbase(char *str){
 		return 0;
 
 	while(str[i]) {
-	 	if( str[i] <= 32 || str[i] == 127 || str[i] == '-' || str[i] == '+')
+	 	if( str[i] <= 32 || str[i] == 127 || str[i] == '-' || str[i] == '+')   //we need to include space in this condition
+		 																		//base shouldn't contain space.
 			return 0;
 		j = i;
 		while(++j <  ft_len(str)) {
@@ -35,7 +34,7 @@ int checkbase(char *str){
 			 return 0;
 		}
 
-		i++;
+		i++;  //it's mandatory to add the first incrementation after the ssecond loop, idk why but it returns bugs in the contrary
 
 	}
 	return 1;
@@ -64,11 +63,10 @@ void ft_putnbr_base(int nbr, char *base){
 
 	into_base(nbr,base);
 
-
 }
 
 
 int main(){
-	char str[] = "0123456789ab88888888cdef";
-	printf("%d",checkbase(str));
+	char str[] = "01234 56789abcdef";
+	ft_putnbr_base(5,str);
 }
