@@ -14,3 +14,4 @@ int main (){
 	printf("%d", ft_recursive_power(3,3));
 }
 
+//don't use the --power, use power -1 in recursive.
