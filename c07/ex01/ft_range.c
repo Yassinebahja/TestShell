@@ -9,10 +9,10 @@ int	*ft_range(int min, int max)
 	int range = max - min;
 	tab = malloc(range * sizeof(int));
 
-	if (!tab || tab <= 0)
+	if (!tab || range <= 0)
 		return NULL;
-	int i = 0;
-	while (i++<range)
+	int i = -1;
+	while (i++<range - 1)
 		tab[i] = min++;
 
 	return tab;
@@ -21,12 +21,12 @@ int	*ft_range(int min, int max)
 int		main()
 {
 	
-	int min = 7;
-	int max = 6;
-	int i =0;
+	int min = 5;
+	int max = 10;
+	int i =-1;
 	int *tab;
 	tab = ft_range(min,max);  //we don't assign the pointer to function but the function but the tab. 
-	while(i++ <max - min){
+	while(i++ <max - min - 1){
 
 		printf("%d ", tab[i]);
 	}
